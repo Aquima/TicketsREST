@@ -9,3 +9,6 @@ class TicketListAPI(APIView):
         serializer = TicketSerializer(ticket, many=True)
         serialized_tickets = serializer.data
         return Response(serialized_tickets)
+
+
+

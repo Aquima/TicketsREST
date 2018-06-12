@@ -13,7 +13,6 @@ class TicketSerializer(serializers.Serializer):
     modify_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
     url_img = serializers.URLField()
 
-
     def create(self, validated_data):
         instance = Ticket()
         return self.update(instance, validated_data)

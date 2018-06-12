@@ -25,7 +25,7 @@ SECRET_KEY = '#l@)i@ow50_l##(23-)!ug8*l)yy177rg=rr&_kfgeed%i+mkl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['67.205.176.58']
+ALLOWED_HOSTS = ['67.205.176.58','127.0.0.1']
 
 
 # Application definition
@@ -40,8 +40,16 @@ INSTALLED_APPS = [
     'ticket',
     'users',
     'rest_framework',
+    'oauth2_provider',
 ]
-
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    )
+}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 import ticket.views
 import users.views
@@ -22,12 +22,17 @@ from users.api import UserListAPI
 from ticket.api import TicketListAPI
 
 urlpatterns = [
+
     path('admin/', admin.site.urls),
     path('ticket/', ticket.views.home, name='home'),
     # Users url
-    path('login/', users.views.login, name='users_login'),
+    path('api-auth/',include('rest_framework.urls', namespace='rest_framework')),
     path('logout/', users.views.logout, name='users_logout'),
 
     path('api/1.0/users/', UserListAPI.as_view(), name='user_list_api'),
-    path('api/1.0/tickets/', TicketListAPI.as_view(), name='ticket_list_api')
+    path('api/1.0/tickets/', TicketListAPI.as_view(), name='ticket_list_api'),
+
+    path('sign_up/', users.views.SignUp.as_view(), name="sign_up"),
+    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+
 ]
